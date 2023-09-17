@@ -28,7 +28,37 @@ app.get('/carnes', async (req,res)=>{
 })
 
 //rota post burgers
+app.post('/burgers',async (req,res)=>{
+    const {pao, carne, name} = await req.body
+    const burgers = await data.Burgers.create({
+        pao,
+        carne,
+        name
+        
+    })
+    res.json(burgers)
+})
 
+//rota get burgers
+app.get('/burgers',async (req,res)=>{
+    const burger = await data.Burgers.findAll()
+    res.status(201).json(burger)
+})
+
+//rota get burgers por id
+app.get('/burgers/:id', async (req,res)=>{
+    const id = req.params.id
+    const burger = await data.Burgers.findByPk(id)
+    res.status(201).json(burger)
+})
+
+//rota delete
+app.delete('/burgers/:id', async (req,res)=>{
+    const id = req.params.id
+    const burger = await data.Burgers.findByPk(id)
+    await burger.destroy()
+    
+})
 
 
 
