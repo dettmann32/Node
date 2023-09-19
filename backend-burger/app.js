@@ -1,5 +1,8 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
+
+app.use(cors())
 
 //body-parser
 const { json } = require('body-parser')
@@ -52,9 +55,13 @@ app.get('/burgers/:id', async (req,res)=>{
 
 //rota delete
 app.delete('/burgers/:id', async (req,res)=>{
+    
     const id = req.params.id
     const burger = await data.Burgers.findByPk(id)
     await burger.destroy()
+    
+    
+
     
 })
 
